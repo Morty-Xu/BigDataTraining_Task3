@@ -1,6 +1,7 @@
 from pyspark import SparkContext, SparkConf
 import pandas as pd
 
+# 数据源为 bilibili.csv，是 Task2中爬取的 b站 2020-05-01至 2020-05-31一个月以来发布的所有鬼畜视频
 # 统计标签字段出现的次数，并以 DataFrames的形式输出到 highFreWord.csv文件中
 
 conf = SparkConf().setAppName('highFreWord').setMaster('local[*]')

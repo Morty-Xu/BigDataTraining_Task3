@@ -1,13 +1,15 @@
 from pyspark import SparkContext, SparkConf
 import pandas as pd
 
+# 数据源为 bilibili.csv，是 Task2中爬取的 b站 2020-05-01至 2020-05-31一个月以来发布的所有鬼畜视频
+# 统计视频播放量常规数据，并输出播放量高于当月平均播放量的视频，输出文件为 playCount.txt
 conf = SparkConf().setAppName('playCount').setMaster('local[*]')
 sc = SparkContext(conf=conf)
 
-file = pd.read_csv('..\\..\\..\\bilibili-test.csv')
+file = pd.read_csv('..\\..\\..\\bilibili.csv')
 
+# 这部分书写不太优雅，但也没找到更好的替代性方法
 data = []
-
 for row in file.itertuples():
     t = (getattr(row, 'up主'), getattr(row, '视频链接'), getattr(row, '三连量'), getattr(row, '播放量'), getattr(row, '标签'), getattr(row, '标题'))
     data.append(t)
